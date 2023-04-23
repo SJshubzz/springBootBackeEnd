@@ -32,7 +32,7 @@ public class jwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        if (request.getServletPath().matches("/user/login|/user/forgotpassword|/user/signup")) {
+        if (request.getServletPath().matches("/user/login|/user/signup|/user/forgotPassword")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -59,14 +59,14 @@ public class jwtFilter extends OncePerRequestFilter {
     }
 
     public boolean isAdmin() {
-        return claims != null && "admin".equalsIgnoreCase((String) claims.get("role"));
+        return "admin".equalsIgnoreCase((String) claims.get("role"));
     }
 
     public boolean isUser() {
-        return claims != null && "user".equalsIgnoreCase((String) claims.get("role"));
+        return "user".equalsIgnoreCase((String) claims.get("role"));
     }
 
     public String getCurrentUser() {
-        return userName != null ? userName : "";
+        return userName ;
     }
 }
