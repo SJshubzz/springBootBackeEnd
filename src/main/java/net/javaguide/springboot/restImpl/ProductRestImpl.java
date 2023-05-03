@@ -1,5 +1,6 @@
 package net.javaguide.springboot.restImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,8 +33,62 @@ public class ProductRestImpl implements ProductRest {
 
 	@Override
 	public ResponseEntity<List<ProductWrapper>> getAllProduct() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return productService.getAllProduct();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> updateProduct(Map<String, String> requestMap) {
+		try {
+			return productService.updateProduct(requestMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Utils.getResponseEntity("error", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> deleteProduct(Integer id) {
+		try {
+			return productService.deleteProduct(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Utils.getResponseEntity(Constance.SOMETHING_WNT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> updateStatus(Map<String, String> requestMap) {
+		try {
+			return productService.updateStatus(requestMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Utils.getResponseEntity(Constance.SOMETHING_WNT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<List<ProductWrapper>> getByCategory(Integer id) {
+		try {
+			return productService.getByCategory(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<ProductWrapper> getProductById(Integer id) {
+		try {
+			return productService.getProductById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(new ProductWrapper(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

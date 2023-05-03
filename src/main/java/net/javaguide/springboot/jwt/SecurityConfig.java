@@ -31,7 +31,9 @@ public class SecurityConfig {
 		http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and().csrf()
 				.disable().authorizeHttpRequests()
 				.requestMatchers("user/login", "user/forgotPassword" , "user/changePassword" , "user/signup","user/update"
-						,"user/get","category/add","category/get","category/update","product/add")
+						,"user/get","category/add","category/get","category/update","product/add","product/get","product/update"
+						,"product/delete/{id}","product/updateStatus","product/getCategory/{id}","product/getByid/{id}"
+						,"bill/generateReport")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
